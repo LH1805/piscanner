@@ -54,7 +54,7 @@ def decode_and_process(frame):
 def main():
     logging.info("🔄 Starte Barcode-Erkennung...")
 
-    cap = cv2.VideoCapture(0)  # Raspberry Pi: ggf. cv2.VideoCapture(0, cv2.CAP_V4L)
+    cap = cv2.VideoCapture(10)  # Raspberry Pi: ggf. cv2.VideoCapture(0, cv2.CAP_V4L)
 
     if not cap.isOpened():
         logging.critical("❌ Kamera konnte nicht geöffnet werden.")
