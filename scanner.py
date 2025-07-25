@@ -53,7 +53,7 @@ def decode_and_process(frame):
             send_to_api(ean)
             # 🕒 Kurze Pause zur besseren Sichtbarkeit in Konsole
             logging.debug("⏸️ Pause nach Scan zur Anzeige von Logs...")
-            time.sleep(2)  # 2 Sekunden Pause
+            time.sleep(5)  # 5 Sekunden Pause
 
 
 def main():
