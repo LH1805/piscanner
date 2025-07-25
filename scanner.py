@@ -45,9 +45,8 @@ def decode_and_process(frame):
 
 def main():
     picam2 = Picamera2()
-    config = picam2.create_preview_configuration(main={"format": "BGR888", "size": (640, 480)})
-    picam2.configure(config)
-    picam2.start()
+    picam2.configure(picam2.create_preview_configuration())  # Vorschau konfigurieren (aber nicht anzeigen)
+    picam2.start()  # Startet Kamera ohne GUI
     logging.info("📷 Kamera gestartet. Halte QR/Barcode vor die Kamera (q zum Beenden).")
 
     try:
