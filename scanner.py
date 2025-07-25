@@ -1,4 +1,4 @@
-from picamera2 import Picamera2, Preview
+from picamera2 import Picamera2
 import cv2
 import time
 from pyzbar.pyzbar import decode
@@ -32,9 +32,7 @@ def decode_and_process(frame):
     for barcode in barcodes:
         ean = barcode.data.decode('utf-8')
         x, y, w, h = barcode.rect
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        cv2.putText(frame, ean, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5, (0, 255, 0), 2)
+        # Hier kannst du das Bild markieren, aber nicht anzeigen
         now = time.time()
         if ean != last_ean or (now - last_detected_time) > DETECTION_PAUSE_SEC:
             logging.info(f"📦 Neuer Barcode erkannt: {ean}")
@@ -45,20 +43,17 @@ def decode_and_process(frame):
 
 def main():
     picam2 = Picamera2()
-    picam2.configure(picam2.create_preview_configuration())  # Vorschau konfigurieren (aber nicht anzeigen)
-    picam2.start()  # Startet Kamera ohne GUI
-    logging.info("📷 Kamera gestartet. Halte QR/Barcode vor die Kamera (q zum Beenden).")
+    picam2.configure(picam2.create_preview_configuration())
+    picam2.start()
+    logging.info("📷 Kamera gestartet. Halte QR/Barcode vor die Kamera.")
 
     try:
         while True:
             frame = picam2.capture_array()
-            frame = decode_and_process(frame)
-            cv2.imshow("Barcode Scanner", frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            decode_and_process(frame)
+            # Kein cv2.imshow oder cv2.waitKey nötig
     finally:
         picam2.stop()
-        cv2.destroyAllWindows()
         logging.info("🛑 Scanner beendet.")
 
 if __name__ == "__main__":
