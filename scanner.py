@@ -8,7 +8,7 @@ import logging
 # Konfiguration
 API_URL = "http://141.72.13.72:8000/api/product-trigger/trigger-popup"
 AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTZXJ2aWNlX0FjY291bnQiLCJleHAiOjIwNjg3MDYyNDh9.MgzTarNa8w7TTXVN16oBpEP4h07qWhh4EWT1yPFBNwo"
-DETECTION_PAUSE_SEC = 2
+DETECTION_PAUSE_SEC = 5
 DEBUG = True
 
 HEADERS = {
